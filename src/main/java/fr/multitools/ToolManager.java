@@ -134,6 +134,9 @@ public final class ToolManager {
             if (plugin.getConfig().getBoolean("settings.hide-attributes", true)) {
                 m.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             }
+            if (plugin.getConfig().getBoolean("settings.hide-unbreakable", true)) {
+                m.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+            }
             if (plugin.getConfig().getBoolean("settings.hide-enchantments", true)) {
                 m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
