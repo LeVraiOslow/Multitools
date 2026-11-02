@@ -40,6 +40,7 @@ public final class ToolManager {
     private RegistryKeySet<BlockType> mineable;
     private DecimalFormat df = new DecimalFormat("#,##0");
     private boolean nexoWarned;
+    private final Map<Float, Tool> toolCache = new HashMap<>();
 
     public ToolManager(MultiToolsPlugin plugin) {
         this.plugin = plugin;
@@ -53,6 +54,7 @@ public final class ToolManager {
 
     public void load(YamlConfiguration cfg) {
         tiers.clear();
+        toolCache.clear();
 
         String sep = plugin.getConfig().getString("settings.number-separator", " ");
         DecimalFormatSymbols sy = new DecimalFormatSymbols(Locale.ROOT);
@@ -132,6 +134,9 @@ public final class ToolManager {
             if (plugin.getConfig().getBoolean("settings.hide-attributes", true)) {
                 m.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             }
+            if (plugin.getConfig().getBoolean("settings.hide-enchantments", true)) {
+                m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            }
             for (Map.Entry<Enchantment, Integer> e : t.enchants.entrySet()) {
                 m.addEnchant(e.getKey(), e.getValue(), true);
             }
@@ -152,11 +157,11 @@ public final class ToolManager {
     }
 
     private Tool buildTool(float speed) {
-        return Tool.tool()
+        return toolCache.computeIfAbsent(speed, sp -> Tool.tool()
                 .defaultMiningSpeed(1.0f)
                 .damagePerBlock(0)
-                .addRule(Tool.rule(mineableBlocks(), speed, TriState.TRUE))
-                .build();
+                .addRule(Tool.rule(mineableBlocks(), sp, TriState.TRUE))
+                .build());
     }
 
     private RegistryKeySet<BlockType> mineableBlocks() {
@@ -211,6 +216,11 @@ public final class ToolManager {
 
     // ------------------------------------------------------------------ état
 
+    public boolean isTool(ItemStack item) {
+        if (item == null || item.getType().isAir() || !item.hasItemMeta()) return false;
+        return item.getItemMeta().getPersistentDataContainer().has(kTool, PersistentDataType.BYTE);
+    }
+
     public State read(ItemStack item) {
         if (tiers.isEmpty() || item == null || item.getType().isAir() || !item.hasItemMeta()) return null;
         PersistentDataContainer pdc = item.getItemMeta().getPersistentDataContainer();
@@ -252,6 +262,8 @@ public final class ToolManager {
                 pdc.set(kTotal, PersistentDataType.LONG, fto);
                 if (refresh) m.lore(buildLore(ft, placeholders(ft, fp, fto, p)));
             });
+            // Réécrire l'ItemMeta peut faire perdre le composant "tool" : on le réapplique à chaque bloc
+            hand.setData(DataComponentTypes.TOOL, buildTool(ft.miningSpeed));
         }
 
         if (plugin.getConfig().getBoolean("settings.actionbar-enabled", true)) {
