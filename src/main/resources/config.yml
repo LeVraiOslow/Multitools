@@ -6,6 +6,7 @@
 settings:
   unbreakable: true            # la MultiTools est incassable
   hide-attributes: true        # cache les lignes "dégâts d'attaque / vitesse"
+  hide-unbreakable: true       # cache la ligne "Unbreakable" en bas du tooltip
   hide-enchantments: true      # cache les enchantements dans le tooltip de l'outil
   debug: false                 # true = log chaque bloc cassé avec la MultiTools (diagnostic)
   # Certains modes (OneBlock SuperiorSkyblock2) annulent l'event de cassage puis gèrent le bloc.
