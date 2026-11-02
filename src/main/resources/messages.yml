@@ -1,0 +1,41 @@
+# ============================================================
+#  MultiTools - messages
+#  Couleurs : &c &b &l &#ff8800 et MiniMessage (<red>, <gradient:...>, <#ff8800>)
+#  Placeholders globaux : {prefix}
+# ============================================================
+prefix: "&8[&6MultiTools&8] "
+max-tier-text: "&6&lMAX"
+
+no-permission: "{prefix}&cTu n'as pas la permission de faire ça."
+reloaded: "{prefix}&aConfiguration rechargée."
+player-not-found: "{prefix}&cJoueur introuvable : &f{name}"
+invalid-tier: "{prefix}&cPalier inconnu : &f{name}"
+invalid-amount: "{prefix}&cMontant invalide."
+not-holding: "{prefix}&cLe joueur doit tenir une MultiTools en main."
+given-sender: "{prefix}&aTu as donné une MultiTools {tier} &aà &f{name}&a."
+given-target: "{prefix}&aTu as reçu une MultiTools {tier}&a."
+settier-done: "{prefix}&aLa MultiTools de &f{name} &aest maintenant au palier {tier}&a."
+addblocks-done: "{prefix}&a+&f{amount} &ablocs ajoutés à la MultiTools de &f{name}&a."
+usage-give: "{prefix}&cUsage : /multitools give <joueur> [palier]"
+usage-settier: "{prefix}&cUsage : /multitools settier <joueur> <palier>"
+usage-addblocks: "{prefix}&cUsage : /multitools addblocks <joueur> <nombre>"
+help:
+  - "&8&m          &r &6MultiTools &8&m          "
+  - "&e/multitools give <joueur> [palier] &7- Donner une MultiTools"
+  - "&e/multitools settier <joueur> <palier> &7- Changer le palier de l'outil en main"
+  - "&e/multitools addblocks <joueur> <n> &7- Ajouter des blocs à l'outil en main"
+  - "&e/multitools reload &7- Recharger la configuration"
+
+# Affichée dans l'actionbar à chaque bloc cassé (désactivable dans config.yml)
+actionbar: "{tier} &8| &7{progress}&8/&7{needed} &8| {bar} &8| &f{percent}%"
+
+level-up:
+  chat:
+    - ""
+    - "&6&l⚒ ÉVOLUTION ! &7Ta MultiTools passe du palier {old_tier} &7au palier {tier}&7 !"
+    - "&7Ses enchantements ont été améliorés."
+    - ""
+  title: "{tier}"
+  subtitle: "&7Ta MultiTools a évolué !"
+  title-times: [10, 70, 20]          # fondu entrant, durée, fondu sortant (en ticks)
+  broadcast: "{prefix}&e{player} &7a fait évoluer sa MultiTools au palier {tier}&7 !"

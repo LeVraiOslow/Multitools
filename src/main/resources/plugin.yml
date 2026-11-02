@@ -1,0 +1,18 @@
+name: MultiTools
+version: 1.0.0
+main: fr.multitools.MultiToolsPlugin
+api-version: '26.2'
+description: Outil évolutif pelle + hache + pioche, 4 paliers, compatible Nexo & ExcellentJobs
+softdepend: [Nexo, ExcellentJobs, ExcellentEnchants]
+commands:
+  multitools:
+    description: Commandes MultiTools
+    aliases: [mtool, mt]
+    usage: /multitools help
+permissions:
+  multitools.admin:
+    description: Accès aux commandes d'administration
+    default: op
+  multitools.use:
+    description: Utiliser la MultiTools (compter les blocs, gagner de l'xp métier)
+    default: true

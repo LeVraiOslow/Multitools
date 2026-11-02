@@ -1,0 +1,69 @@
+# ============================================================
+#  MultiTools - configuration générale
+#  Les couleurs fonctionnent partout : &c &b &l ... , &#ff8800
+#  et le format "HTML" MiniMessage : <red>, <#ff8800>, <gradient:red:gold>texte</gradient>, <bold>
+# ============================================================
+settings:
+  unbreakable: true            # la MultiTools est incassable
+  hide-attributes: true        # cache les lignes "dégâts d'attaque / vitesse"
+  count-creative: false        # compter les blocs en créatif ?
+  disabled-worlds: []          # ex: [world_creative]
+  ignored-blocks: []           # ex: [FIRE, LIGHT] (ne comptent pas dans la progression)
+  lore-update-every: 25        # met à jour la lore de l'item tous les X blocs (1 = à chaque bloc)
+  refresh-on-join: true        # reconstruit les MultiTools de l'inventaire à la connexion / reload
+                               # (applique tes changements de tiers.yml sans perdre la progression)
+  actionbar-enabled: true      # affiche la progression dans l'actionbar (message "actionbar")
+  broadcast-tiers: [epic, mythic]   # paliers qui déclenchent une annonce globale
+  number-separator: " "        # séparateur des milliers (3 000)
+  progress-bar:
+    length: 20
+    char: "■"
+    filled-color: "&a"
+    empty-color: "&8"
+
+# ============================================================
+#  Récompenses d'xp pour ExcellentJobs
+#  L'xp est donnée via une commande console.
+#  "job" = nom du fichier du métier dans plugins/ExcellentJobs/jobs/ (sans .yml)
+#  "xp"  = nombre fixe (5) ou intervalle aléatoire ("3-6")
+#  "blocks" = matériaux (STONE), tags ("#minecraft:logs") ou "*" (tout)
+#  L'xp est multipliée par "jobs-xp-multiplier" du palier de l'outil.
+#
+#  ATTENTION : ExcellentJobs récompense déjà nativement le cassage de blocs
+#  via ses propres objectifs. Si tu as de l'xp en double, mets enabled: false
+#  ici OU retire les objectifs "block break" dans les jobs d'ExcellentJobs.
+# ============================================================
+jobs:
+  enabled: true
+  # Vérifie la syntaxe avec /jobs xp dans le jeu. Selon ta version :
+  #   "jobs xp give {player} {job} {xp} -s"
+  #   "jobs xp add {job} {xp} {player} -s"
+  command: "jobs xp give {player} {job} {xp} -s"
+  first-match-only: true       # un bloc ne rapporte de l'xp qu'à un seul métier (le 1er de la liste)
+  rewards:
+    - job: lumberjack
+      xp: "4-6"
+      blocks: ["#minecraft:logs"]
+    - job: lumberjack
+      xp: 0.5
+      blocks: ["#minecraft:leaves"]
+    - job: miner
+      xp: "8-12"
+      blocks: ["ANCIENT_DEBRIS"]
+    - job: miner
+      xp: "5-8"
+      blocks: ["#minecraft:diamond_ores", "#minecraft:emerald_ores"]
+    - job: miner
+      xp: "3-5"
+      blocks: ["#minecraft:gold_ores", "#minecraft:iron_ores", "#minecraft:lapis_ores",
+               "#minecraft:redstone_ores", "#minecraft:copper_ores", "#minecraft:coal_ores",
+               "NETHER_QUARTZ_ORE", "NETHER_GOLD_ORE"]
+    - job: miner
+      xp: 1
+      blocks: ["#minecraft:base_stone_overworld", "#minecraft:base_stone_nether", "END_STONE", "OBSIDIAN"]
+    - job: digger
+      xp: "1-2"
+      blocks: ["#minecraft:dirt", "#minecraft:sand", "GRAVEL", "CLAY", "SOUL_SAND", "SOUL_SOIL", "SNOW_BLOCK"]
+    - job: farmer
+      xp: "1-3"
+      blocks: ["#minecraft:crops", "MELON", "PUMPKIN", "SUGAR_CANE", "CACTUS", "NETHER_WART", "COCOA", "SWEET_BERRY_BUSH", "BAMBOO"]
