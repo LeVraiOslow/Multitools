@@ -3,7 +3,7 @@ version: 1.0.0
 main: fr.multitools.MultiToolsPlugin
 api-version: '26.2'
 description: Outil évolutif pelle + hache + pioche, 4 paliers, compatible Nexo & ExcellentJobs
-softdepend: [Nexo, ExcellentJobs, ExcellentEnchants]
+softdepend: [Nexo, ExcellentJobs, ExcellentEnchants, SuperiorSkyblock2]
 commands:
   multitools:
     description: Commandes MultiTools

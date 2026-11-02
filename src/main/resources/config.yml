@@ -6,10 +6,18 @@
 settings:
   unbreakable: true            # la MultiTools est incassable
   hide-attributes: true        # cache les lignes "dégâts d'attaque / vitesse"
+  hide-enchantments: true      # cache les enchantements dans le tooltip de l'outil
+  debug: false                 # true = log chaque bloc cassé avec la MultiTools (diagnostic)
+  # Certains modes (OneBlock SuperiorSkyblock2) annulent l'event de cassage puis gèrent le bloc.
+  # On compte quand même ces blocs si l'event est annulé, dans les mondes listés.
+  count-cancelled-events:
+    enabled: true
+    worlds: ["SuperiorWorld", "SuperiorWorld_nether", "SuperiorWorld_the_end"]  # vide = tous les mondes
+    require-island-member: true   # avec SSB2 : ne compte que sur une île dont le joueur est membre
   count-creative: false        # compter les blocs en créatif ?
   disabled-worlds: []          # ex: [world_creative]
   ignored-blocks: []           # ex: [FIRE, LIGHT] (ne comptent pas dans la progression)
-  lore-update-every: 25        # met à jour la lore de l'item tous les X blocs (1 = à chaque bloc)
+  lore-update-every: 1         # met à jour la lore de l'item tous les X blocs (1 = à chaque bloc)
   refresh-on-join: true        # reconstruit les MultiTools de l'inventaire à la connexion / reload
                                # (applique tes changements de tiers.yml sans perdre la progression)
   actionbar-enabled: true      # affiche la progression dans l'actionbar (message "actionbar")
